@@ -37,7 +37,6 @@ export default class GradientCircle {
     this.materialGrad = new THREE.ShaderMaterial({
       uniforms: this.uniforms,
       ...Shader,
-      // lights: true,
       transparent: true,
     });
     this.materialGrad.depthWrite = false;
@@ -54,7 +53,7 @@ export default class GradientCircle {
     this.circle.material = this.materialGrad;
     this.circle.position.z = 0.001;
 
-    this.lettersStartZPos = -0.22;
+    this.lettersStartZPos = 0.002;
     this.model.lettersTop.position.z = this.lettersStartZPos;
     this.model.modelGroup.add(this.circle);
   }
@@ -72,8 +71,6 @@ export default class GradientCircle {
 
       .to(this.model.modelGroup.rotation, { x: -1, z: -0.7, duration: 1 })
       .to(this.model.modelGroup.position, { z: 4, duration: 0.8 }, '<')
-      // .to(this.manager.camera.perspectiveCamera.rotation, {x: 0.94, y: 0.68, z: 0.46})
-      // .to(this.manager.camera.perspectiveCamera.position, {x: 5, y: -5, z: 4.6}, "<")
 
       .to(this.circle.scale, { x: 1, y: 1 }, '<+0.3')
 

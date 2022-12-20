@@ -55,28 +55,6 @@ export default class Model {
           this.edgeInner = child;
           break;
       }
-
-      // if (child.name === 'Circle') {
-      //   this.circle = child;
-      //   this.setModelPart(child, 1, true);
-      // }
-      // if (child.name === 'LettersFill') {
-      //   this.letters = child;
-      //   this.setModelPart(child);
-      // }
-      // if (child.name === 'Letters') {
-      //   this.lettersTop = child;
-      //   this.setModelPart(child);
-      // }
-      // if (child.name === 'ring') {
-      //   this.mLines = child;
-      // }
-      // if (child.name === 'rim') {
-      //   this.edge = child;
-      // }
-      // if (child.name === 'rimInner') {
-      //   this.edgeInner = child;
-      // }
     });
 
     this.modelLines = new ModelLines(this.mLines, this.rimRingGroup);

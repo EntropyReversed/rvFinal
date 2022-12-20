@@ -6,6 +6,7 @@ import LinesAnimation from './LinesAnimation';
 import ModelLines from '../../Manager/World/ModelLines';
 import EdgeRim from '../../Manager/World/EdgeRim';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
+import ModelPieces from '../../Manager/World/ModelPieces';
 
 export default class Model {
   constructor() {
@@ -28,35 +29,39 @@ export default class Model {
   setModel() {
     this.rimRingGroup = new THREE.Group();
     this.modelGroup = new THREE.Group();
+    this.pieces = [];
 
     this.model.scene.traverse((child) => {
-      console.log(child);
-
-      switch (child.name) {
-        case 'Circle':
+      switch (true) {
+        case child.name.includes('Circle'):
           this.circle = child;
-          this.setModelPart(child, 1, true);
+          this.setModelPart(child, 1);
           break;
-        case 'LettersFill':
+        case child.name.includes('LettersFill'):
           this.letters = child;
           this.setModelPart(child);
           break;
-        case 'Letters':
+        case child.name === 'Letters':
           this.lettersTop = child;
           this.setModelPart(child);
           break;
-        case 'ring':
+        case child.name.includes('ring'):
           this.mLines = child;
           break;
-        case 'rim':
+        case child.name === 'rim':
+          console.log('rim');
           this.edge = child;
           break;
-        case 'rimInner':
+        case child.name.includes('rimInner'):
           this.edgeInner = child;
+          break;
+        case child.name.includes('Piece'):
+          this.pieces.push(child);
           break;
       }
     });
 
+    this.modelPieces = new ModelPieces(this.pieces, this.modelGroup, this.mainColor);
     this.modelLines = new ModelLines(this.mLines, this.rimRingGroup);
     this.edgeRim = new EdgeRim(
       this.edge,
@@ -80,22 +85,14 @@ export default class Model {
     // part.layers.enable(0);
 
     part.material = new THREE.MeshStandardMaterial();
-
-    // part.geometry.computeTangents();
-    // part.geometry.computeVertexNormals();
-    // part.geometry.verticesNeedUpdate = true;
-    // part.geometry.normalsNeedUpdate = true;
-
     part.material.transparent = true;
     part.material.color = this.mainColor;
 
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
-    // part.material.depthWrite = false;
-    // part.material.wireframe = true;
+
     part.material.flatShading = shade;
-    // part.material.vertexColors = true;
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;

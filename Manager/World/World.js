@@ -37,6 +37,7 @@ export default class World {
     const modelLinesTimeline = this.model.modelLines.getTimeline();
     const edgeTimeline = this.model.edgeRim.getTimeline();
     const cameraTimeline2 = this.camera.getTimeline2();
+    const modelPiecesTimeline = this.model.modelPieces.getTimeline()
 
     this.masterTimeline
       .add(modelTimeline1)
@@ -49,7 +50,8 @@ export default class World {
       .add(cameraTimeline)
       .add(modelLinesTimeline, '<')
       .add(edgeTimeline, '-=1.5')
-      .add(cameraTimeline2, '-=1.7');
+      .add(cameraTimeline2, '-=1.7')
+      .add(modelPiecesTimeline);
 
     this.scrollTrigger = new TriggerScroll();
   }

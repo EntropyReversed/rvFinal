@@ -42,7 +42,7 @@ export default class ModelLines {
       // mesh.material.wireframe = true;
 
       mesh.position.z = i * -this.posOffsetZ - 0.01;
-      mesh.rotation.z = 2.1 + linesData[i][2];
+      mesh.rotation.z = 1 + linesData[i][2];
       // mesh.layers.enable(1);
 
       this.lines.push(mesh);
@@ -61,7 +61,7 @@ export default class ModelLines {
       const dur = Math.random() * 2 + 2;
       // console.log(index, dur);
       this.timeline
-        .to(line.rotation, { z: -0.8, duration: dur }, linesData[index][1])
+        .to(line.rotation, { z: -2.5, duration: dur }, linesData[index][1])
         .fromTo(line.material, { opacity: 0 }, { opacity: 1 }, '<');
     });
 

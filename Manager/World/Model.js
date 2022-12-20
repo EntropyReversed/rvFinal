@@ -31,27 +31,52 @@ export default class Model {
 
     this.model.scene.traverse((child) => {
       console.log(child);
-      if (child.name === 'Circle') {
-        this.circle = child;
-        this.setModelPart(child, 1, true);
+
+      switch (child.name) {
+        case 'Circle':
+          this.circle = child;
+          this.setModelPart(child, 1, true);
+          break;
+        case 'LettersFill':
+          this.letters = child;
+          this.setModelPart(child);
+          break;
+        case 'Letters':
+          this.lettersTop = child;
+          this.setModelPart(child);
+          break;
+        case 'ring':
+          this.mLines = child;
+          break;
+        case 'rim':
+          this.edge = child;
+          break;
+        case 'rimInner':
+          this.edgeInner = child;
+          break;
       }
-      if (child.name === 'LettersFill') {
-        this.letters = child;
-        this.setModelPart(child);
-      }
-      if (child.name === 'Letters') {
-        this.lettersTop = child;
-        this.setModelPart(child);
-      }
-      if (child.name === 'ring') {
-        this.mLines = child;
-      }
-      if (child.name === 'rim') {
-        this.edge = child;
-      }
-      if (child.name === 'rimInner') {
-        this.edgeInner = child;
-      }
+
+      // if (child.name === 'Circle') {
+      //   this.circle = child;
+      //   this.setModelPart(child, 1, true);
+      // }
+      // if (child.name === 'LettersFill') {
+      //   this.letters = child;
+      //   this.setModelPart(child);
+      // }
+      // if (child.name === 'Letters') {
+      //   this.lettersTop = child;
+      //   this.setModelPart(child);
+      // }
+      // if (child.name === 'ring') {
+      //   this.mLines = child;
+      // }
+      // if (child.name === 'rim') {
+      //   this.edge = child;
+      // }
+      // if (child.name === 'rimInner') {
+      //   this.edgeInner = child;
+      // }
     });
 
     this.modelLines = new ModelLines(this.mLines, this.rimRingGroup);

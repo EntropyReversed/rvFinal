@@ -38,7 +38,7 @@ export default class ModelLines {
       mesh.material.depthWrite = false;
       mesh.material.transparent = true;
       mesh.material.needsUpdate = true;
-      mesh.visible = false;
+      mesh.visible = true;
       // mesh.material.wireframe = true;
 
       mesh.position.z = i * -this.posOffsetZ - 0.01;
@@ -59,7 +59,7 @@ export default class ModelLines {
 
     this.lines.forEach((line, index) => {
       const dur = Math.random() * 2 + 2;
-      console.log(index, dur);
+      // console.log(index, dur);
       this.timeline
         .to(line.rotation, { z: -0.8, duration: dur }, linesData[index][1])
         .fromTo(line.material, { opacity: 0 }, { opacity: 1 }, '<');

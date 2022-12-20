@@ -54,14 +54,15 @@ export default class GradientCircle {
     this.circle.material = this.materialGrad;
     this.circle.position.z = 0.001;
 
-    this.model.lettersTop.position.z = 0.0012;
+    this.lettersStartZPos = -0.22;
+    this.model.lettersTop.position.z = this.lettersStartZPos;
     this.model.modelGroup.add(this.circle);
   }
 
   setUpTimeline() {
     const c = new THREE.Color('rgb(0,0,0)');
     this.timeline
-      .set(this.model.lettersTop.position, { z: 0.0012 })
+      .set(this.model.lettersTop.position, { z: this.lettersStartZPos })
       .fromTo(
         this.circle.scale,
         { x: 0, y: 0 },

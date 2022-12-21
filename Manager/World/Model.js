@@ -105,6 +105,7 @@ export default class Model {
       .timeline()
 
       .to(this.circle.material, { opacity: 0.3 })
+      .to({}, {duration: 0.1})
       .to(this.modelGroup.scale, { x: 0.8, y: 0.8, duration: 0.8 }, '<')
       .to(this.modelGroup.scale, { x: 1.2, y: 1.2, duration: 0.2 })
       .to(this.circle.material, { opacity: 1 }, '<')
@@ -140,6 +141,7 @@ export default class Model {
         { scale: 1, duration: 0.2, ease: 'power3.out' },
         '<'
       )
+      .to({}, {duration: 0.05})
       .to('.secondTitle', { opacity: 0 }, '<+0.5')
       .to(this.lettersTop.material, { opacity: 1 }, '<+0.2');
   }

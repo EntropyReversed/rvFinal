@@ -20,11 +20,12 @@ export default class Text {
           stagger: 0.012,
         }
       )
+      .to({}, {duration: 0.3})
       .to(
         '.firstTitle',
         {
           opacity: 0,
-          duration: 0.1,
+          duration: 0.2,
         },
         '+=0.2'
       );

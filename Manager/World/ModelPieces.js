@@ -49,13 +49,13 @@ export default class ModelPieces {
     this.timeline
       .to(this.manager.world.model.modelGroup.position, {
         x: -0.3,
-        duration: 2,
+        duration: 4,
       })
       .to(
         this.manager.world.model.modelGroup.rotation,
         {
           y: 0.3,
-          duration: 2,
+          duration: 4,
         },
         '<'
       );
@@ -63,7 +63,7 @@ export default class ModelPieces {
     const pieceDuration = 6;
     let maxDelay = 0;
     this.pieces.forEach((piece) => {
-      const delay = Math.random() * 0.01;
+      const delay = Math.random() * 0.02;
       if (delay > maxDelay) {
         maxDelay = delay;
       }
@@ -77,8 +77,8 @@ export default class ModelPieces {
             { z: 0.4 },
             { z: 1.4 },
             { z: 0.7 },
-            { z: 1.2 },
-            { z: 0.6 },
+            // { z: 1.2 },
+            // { z: 0.6 },
             { z: 1 },
             { z: 0 },
           ],

@@ -101,15 +101,15 @@ export default class GradientCircle {
           value: 1.1,
           duration: 0.8,
           ease: 'power3.out',
-          // onStart: () => {
-          //   console.log('start timer');
-          // },
-          // onReverseComplete: () => {
-          //   console.log('stop timer');
-          // },
-          // onComplete: () => {
-          //   console.log('stop timer');
-          // },
+          onStart: () => {
+            console.log('start timer');
+          },
+          onReverseComplete: () => {
+            console.log('stop timer');
+          },
+          onComplete: () => {
+            console.log('stop timer');
+          },
         },
         '<'
       )
@@ -125,9 +125,9 @@ export default class GradientCircle {
           g: 200 / 255,
           b: 200 / 255,
           duration: 0.15,
-          // onUpdate: () => {
-          //   this.model.lettersTop.material.color = c;
-          // },
+          onUpdate: () => {
+            this.model.lettersTop.material.color = c;
+          },
         },
         '<+=0.1'
       )
@@ -154,6 +154,7 @@ export default class GradientCircle {
         { scale: 1, duration: 0.2, ease: 'power3.out' },
         '<'
       )
+      .to({}, {duration: 0.1})
       .to('.thirdTitle', { opacity: 0 }, '<+0.3')
 
       .to(this.model.lettersTop.position, { z: 0.2, duration: 0.2 }, '-=0.3')

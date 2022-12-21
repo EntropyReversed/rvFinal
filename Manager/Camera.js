@@ -156,7 +156,8 @@ export default class Camera {
         { scale: 1, duration: 0.2, ease: 'power3.out' },
         '<'
       )
-      .to('.fourthTitle', { opacity: 0 }, '<+0.6');
+      .to({}, {duration: 0.1})
+      .to('.fourthTitle', { opacity: 0 }, '<+0.6')
 
     return this.timeline2;
   }

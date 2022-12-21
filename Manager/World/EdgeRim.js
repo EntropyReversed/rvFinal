@@ -64,7 +64,7 @@ export default class EdgeRim {
 
       .to(
         this.materialGrad.uniforms.progress,
-        { value: -0.2, duration: 1.5 },
+        { value: -0.2, duration: 1.4 },
         '<+=0.1'
       )
       .to(this.materialGrad.uniforms.opacity, { value: 0, duration: 1 })

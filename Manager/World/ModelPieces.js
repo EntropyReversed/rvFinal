@@ -40,13 +40,13 @@ export default class ModelPieces {
 
   getTimeline() {
     this.timeline = gsap.timeline();
-    // this.pieces.forEach((piece) => {
-    //   this.timeline.set(piece, { visible: true });
-    // });
+    this.pieces.forEach((piece) => {
+      this.timeline.set(piece, { visible: true });
+    });
 
-    // this.pieces.forEach((piece) => {
-    //   this.timeline.fromTo(piece.scale, { z: 0 }, { z: 1 }, '<');
-    // });
+    this.pieces.forEach((piece) => {
+      this.timeline.fromTo(piece.scale, { z: 0 }, { z: 1 }, '<');
+    });
 
     return this.timeline;
   }

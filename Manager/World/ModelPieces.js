@@ -17,7 +17,7 @@ export default class ModelPieces {
   setUpPieces() {
     this.pieces.forEach((piece) => {
       this.setModelPart(piece, 1);
-      piece.position.z = -0.05;
+      piece.position.z = -0.01;
       piece.scale.z = 0;
       this.group.add(piece);
     });
@@ -46,9 +46,22 @@ export default class ModelPieces {
       this.timeline.set(piece, { visible: true });
     });
 
+    this.timeline.to(this.manager.world.model.modelGroup.position, {
+      x: -0.3,
+      duration: 2,
+    });
+    this.timeline.to(
+      this.manager.world.model.modelGroup.rotation,
+      {
+        y: 0.3,
+        duration: 2,
+      },
+      '<'
+    );
+
     const pieceDuration = 5;
     let maxDelay = 0;
-    this.pieces.forEach((piece, index) => {
+    this.pieces.forEach((piece) => {
       const delay = Math.random() * 0.01;
       if (delay > maxDelay) {
         maxDelay = delay;
@@ -72,17 +85,34 @@ export default class ModelPieces {
           duration: pieceDuration,
           delay: delay,
         },
-        index === 0 ? '' : '<'
+        '<'
       );
     });
 
     // this.timeline.to(this.manager.camera.perspectiveCamera.)
 
-    this.timeline.to(
-      this.manager.world.model.modelGroup.rotation,
-      { z: Math.PI * 1.3, duration: pieceDuration + maxDelay },
-      '<'
-    );
+    this.timeline
+      .to(
+        this.manager.world.model.modelGroup.rotation,
+        { z: Math.PI * 1.3, duration: pieceDuration + maxDelay },
+        '<'
+      )
+      .to(
+        this.manager.world.model.modelGroup.position,
+        {
+          x: 0,
+          duration: 2,
+        },
+        '-=2'
+      )
+      .to(
+        this.manager.world.model.modelGroup.rotation,
+        {
+          y: 0,
+          duration: 2,
+        },
+        '<'
+      );
 
     this.pieces.forEach((piece) => {
       this.timeline.set(piece, { visible: false });

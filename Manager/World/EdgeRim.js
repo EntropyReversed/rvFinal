@@ -29,7 +29,7 @@ export default class EdgeRim {
   setInner() {
     // this.inner.visible = false;
     this.inner.rotation.z = -0.95;
-    this.inner.position.z = this.inner.position.z + 0.01;
+    this.inner.position.z = this.inner.position.z + 0.005;
 
     this.uniforms = THREE.UniformsUtils.merge([
       { u_texture: { value: null } },

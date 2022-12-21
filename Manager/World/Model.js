@@ -5,8 +5,8 @@ import GradientCircle from './GradientCircle';
 import LinesAnimation from './LinesAnimation';
 import ModelLines from '../../Manager/World/ModelLines';
 import EdgeRim from '../../Manager/World/EdgeRim';
-import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import ModelPieces from '../../Manager/World/ModelPieces';
+
 
 export default class Model {
   constructor() {
@@ -22,8 +22,6 @@ export default class Model {
     this.gradientCircle = new GradientCircle(this.lines, this);
 
     this.createTimeline();
-
-    // window.scrollTo(0, 0);
   }
 
   setModel() {

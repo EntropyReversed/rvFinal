@@ -41,7 +41,7 @@ export default class Camera {
     // folder
     //   .add(this.perspectiveCamera.position, 'x', -30, 30, 0.01)
     //   .onChange(() => {
-    //     guiChangeHangler();
+    //     // guiChangeHangler();
     //     // this.perspectiveCamera.lookAt(lookAtVector)
     //   });
     // folder.add(this.perspectiveCamera.position, 'y', -30, 30, 0.01);
@@ -55,7 +55,6 @@ export default class Camera {
     // folder2.add(this.perspectiveCamera.rotation, 'z', -10, 10, 0.01);
     // folder2.open();
 
-    // this.setPath();
   }
 
   getTimeline() {
@@ -155,25 +154,6 @@ export default class Camera {
       .to('.fourthTitle', { opacity: 0 }, '<+0.6');
 
     return this.timeline2;
-  }
-
-  setPath() {
-    this.curve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0, 0, 12),
-      new THREE.Vector3(0, 0, 9),
-      new THREE.Vector3(0, 0, 6),
-      new THREE.Vector3(3, 0, 4),
-      new THREE.Vector3(1, 0, 2),
-    ]);
-
-    // const points = this.curve.getPoints(40);
-    // const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    // console.log(geometry);
-
-    // const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
-
-    // const curveObject = new THREE.Line(geometry, material);
-    // this.scene.add(curveObject);
   }
 
   createPerspectiveCameraMain() {

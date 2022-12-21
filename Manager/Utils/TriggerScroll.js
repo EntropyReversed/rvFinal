@@ -17,7 +17,7 @@ export default class TriggerScroll {
           start: 'top top',
           scrub: 2,
           immediateRender: false,
-          invalidateOnRefresh: true,
+          // invalidateOnRefresh: true,
           // end: "+=1200%",
           // pin: true,
           end: 'bottom bottom',

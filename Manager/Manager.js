@@ -6,7 +6,7 @@ import Resources from './Utils/Resources';
 import World from './World/World';
 import assets from './Utils/assets';
 import gsap from 'gsap';
-import Stats from 'three/addons/libs/stats.module.js';
+// import Stats from 'three/addons/libs/stats.module.js';
 
 export default class Manager {
   static instance;
@@ -26,8 +26,10 @@ export default class Manager {
     this.masterTimeline = gsap.timeline();
     this.world = new World();
 
-    this.stats = new Stats();
-    document.body.appendChild(this.stats.dom);
+    this.pause = false;
+
+    // this.stats = new Stats();
+    // document.body.appendChild(this.stats.dom);
 
     document.body.onmousedown = function (e) {
       if (e.button === 1) return false;
@@ -47,10 +49,11 @@ export default class Manager {
   update() {
     this.camera.update();
     this.renderer.update();
-    this.stats.update();
+    // this.stats.update();
 
-    // if (this.world.model?.gradientCircle) {
     this.world.model.gradientCircle.updateTime();
-    // }
+
+    // if (this.pause) return;
+    // window.requestAnimationFrame(() => this.update());
   }
 }

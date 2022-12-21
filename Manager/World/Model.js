@@ -7,7 +7,6 @@ import ModelLines from '../../Manager/World/ModelLines';
 import EdgeRim from '../../Manager/World/EdgeRim';
 import ModelPieces from '../../Manager/World/ModelPieces';
 
-
 export default class Model {
   constructor() {
     this.manager = new Manager();
@@ -25,6 +24,7 @@ export default class Model {
   }
 
   setModel() {
+    this.mainMaterial = new THREE.MeshStandardMaterial();
     this.rimRingGroup = new THREE.Group();
     this.modelGroup = new THREE.Group();
     this.pieces = [];
@@ -85,7 +85,7 @@ export default class Model {
   setModelPart(part, startOp = 0, shade = false) {
     // part.layers.enable(0);
 
-    part.material = new THREE.MeshStandardMaterial();
+    part.material = this.mainMaterial.clone();
     part.material.transparent = true;
     part.material.color = this.mainColor;
 

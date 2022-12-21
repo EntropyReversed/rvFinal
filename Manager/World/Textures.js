@@ -2,8 +2,11 @@ import * as THREE from 'three';
 
 export default class Textures {
   constructor() {
-    this.gradientTexture = new THREE.CanvasTexture(this.generateTexture())
-    this.lettersTexture = new THREE.CanvasTexture(this.generateTextureLetters())
+    this.gradientTexture = new THREE.CanvasTexture(this.generateTexture());
+    this.lettersTexture = new THREE.CanvasTexture(
+      this.generateTextureLetters()
+    );
+    // this.noiseTexture = new THREE.CanvasTexture(this.generateWhiteNoise());
   }
 
   generateTexture() {
@@ -13,13 +16,13 @@ export default class Textures {
     canvas.width = size;
     canvas.height = size;
     ctx.rect(0, 0, size, size);
-  
+
     const gradient = ctx.createLinearGradient(size / 2, 0, size / 2, size);
     gradient.addColorStop(0, '#a59bf4');
     gradient.addColorStop(1, '#f2a0ac');
     ctx.fillStyle = gradient;
     ctx.fill();
-  
+
     return canvas;
   }
 
@@ -60,4 +63,31 @@ export default class Textures {
 
     return canvas;
   }
+
+  // generateWhiteNoise() {
+  //   const size = 1024;
+  //   const canvas = document.createElement('canvas');
+  //   const ctx = canvas.getContext('2d');
+
+  //   canvas.width = size;
+  //   canvas.height = size;
+
+  //   const noiseData = [];
+  //   for (let i = 0; i < canvas.width; i++) {
+  //     noiseData[i] = [];
+  //     for (let j = 0; j < canvas.height; j++) {
+  //       noiseData[i][j] = Math.floor(Math.random() * 256);
+  //     }
+  //   }
+
+  //   for (let i = 0; i < canvas.width; i++) {
+  //     for (let j = 0; j < canvas.height; j++) {
+  //       const value = noiseData[i][j];
+  //       ctx.fillStyle = `rgb(${value}, ${value}, ${value})`;
+  //       ctx.fillRect(i, j, 1, 1);
+  //     }
+  //   }
+
+  //   return canvas;
+  // }
 }

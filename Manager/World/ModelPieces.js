@@ -46,20 +46,21 @@ export default class ModelPieces {
       this.timeline.set(piece, { visible: true });
     });
 
-    this.timeline.to(this.manager.world.model.modelGroup.position, {
-      x: -0.3,
-      duration: 2,
-    });
-    this.timeline.to(
-      this.manager.world.model.modelGroup.rotation,
-      {
-        y: 0.3,
+    this.timeline
+      .to(this.manager.world.model.modelGroup.position, {
+        x: -0.3,
         duration: 2,
-      },
-      '<'
-    );
+      })
+      .to(
+        this.manager.world.model.modelGroup.rotation,
+        {
+          y: 0.3,
+          duration: 2,
+        },
+        '<'
+      );
 
-    const pieceDuration = 5;
+    const pieceDuration = 7;
     let maxDelay = 0;
     this.pieces.forEach((piece) => {
       const delay = Math.random() * 0.01;
@@ -74,14 +75,14 @@ export default class ModelPieces {
             { z: 0.5 },
             { z: 1.1 },
             { z: 0.3 },
-            { z: 0.9 },
+            { z: 1.3 },
             { z: 0.2 },
             { z: 1.2 },
             { z: 0.6 },
             { z: 1 },
             { z: 0 },
           ],
-          ease: 'power1.inOut',
+          // ease: 'power1.inOut',
           duration: pieceDuration,
           delay: delay,
         },
@@ -89,28 +90,31 @@ export default class ModelPieces {
       );
     });
 
-    // this.timeline.to(this.manager.camera.perspectiveCamera.)
-
     this.timeline
       .to(
         this.manager.world.model.modelGroup.rotation,
-        { z: Math.PI * 1.3, duration: pieceDuration + maxDelay },
+        { z: Math.PI * 1.1, duration: pieceDuration + maxDelay },
         '<'
       )
       .to(
-        this.manager.world.model.modelGroup.position,
+        this.manager.world.model.circle.position,
         {
-          x: 0,
+          z: 0.195,
           duration: 2,
         },
         '-=2'
       )
-      .to(
-        this.manager.world.model.modelGroup.rotation,
-        {
-          y: 0,
-          duration: 2,
-        },
+
+      .fromTo(
+        '.fifthTitle',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.2, ease: 'power3.out' },
+        '-=0.5'
+      )
+      .fromTo(
+        '.fifthTitle',
+        { scale: 2 },
+        { scale: 1, duration: 0.2, ease: 'power3.out' },
         '<'
       );
 

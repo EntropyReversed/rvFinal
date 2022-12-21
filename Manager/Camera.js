@@ -159,8 +159,8 @@ export default class Camera {
         { scale: 1, duration: 0.2, ease: 'power3.out' },
         '<'
       )
-      .to({}, {duration: 0.1})
-      .to('.fourthTitle', { opacity: 0 }, '<+0.6')
+      .to({}, { duration: 0.1 })
+      .to('.fourthTitle', { opacity: 0 }, '<+0.6');
 
     return this.timeline2;
   }
@@ -198,16 +198,14 @@ export default class Camera {
   resize() {
     if (window.matchMedia('(max-width: 991px)').matches) {
       if (this.fov !== this.fovMax) {
-        this.fov = this.fovMax
+        this.fov = this.fovMax;
       }
-      console.log('mobile', this.fov)
     } else {
       if (this.fov !== this.fovMin) {
-        this.fov = this.fovMin
+        this.fov = this.fovMin;
       }
-      console.log('desktop', this.fov)
     }
-    this.perspectiveCamera.fov = this.fov
+    this.perspectiveCamera.fov = this.fov;
     this.perspectiveCamera.aspect = this.sizes.aspect;
     this.perspectiveCamera.updateProjectionMatrix();
 
@@ -215,10 +213,10 @@ export default class Camera {
     this.perspectiveCameraMain.updateProjectionMatrix();
   }
 
-  update() {
-    // this.controls.update();
-    // this.helper.matrixWorldNeedsUpdate = true;
-    // this.helper.update();
-    // this.helper.position.copy(this.perspectiveCameraMain.position);
-  }
+  // update() {
+  //   // this.controls.update();
+  //   // this.helper.matrixWorldNeedsUpdate = true;
+  //   // this.helper.update();
+  //   // this.helper.position.copy(this.perspectiveCameraMain.position);
+  // }
 }

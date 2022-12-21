@@ -49,7 +49,7 @@ export default class Manager {
   }
 
   update() {
-    this.camera.update();
+    // this.camera.update();
     this.renderer.update();
     // this.stats.update();
 

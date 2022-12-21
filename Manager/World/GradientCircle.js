@@ -20,9 +20,7 @@ export default class GradientCircle {
     this.masterTimeline = this.manager.masterTimeline;
     this.texture = this.manager.world.textures.gradientTexture;
     this.lettersTex = this.manager.world.textures.lettersTexture;
-    this.timeline = gsap.timeline();
     this.setCircleGrad();
-    this.setUpTimeline();
   }
 
   setCircleGrad() {
@@ -64,7 +62,8 @@ export default class GradientCircle {
     this.model.modelGroup.add(this.circle);
   }
 
-  setUpTimeline() {
+  getTimeline() {
+    this.timeline = gsap.timeline();
     const c = new Color('rgb(0,0,0)');
     this.timeline
       .set(this.model.lettersTop.position, { z: this.lettersStartZPos })
@@ -101,15 +100,15 @@ export default class GradientCircle {
           value: 1.1,
           duration: 0.8,
           ease: 'power3.out',
-          onStart: () => {
-            console.log('start timer');
-          },
-          onReverseComplete: () => {
-            console.log('stop timer');
-          },
-          onComplete: () => {
-            console.log('stop timer');
-          },
+          // onStart: () => {
+          //   console.log('start timer');
+          // },
+          // onReverseComplete: () => {
+          //   console.log('stop timer');
+          // },
+          // onComplete: () => {
+          //   console.log('stop timer');
+          // },
         },
         '<'
       )
@@ -125,9 +124,6 @@ export default class GradientCircle {
           g: 200 / 255,
           b: 200 / 255,
           duration: 0.15,
-          onUpdate: () => {
-            this.model.lettersTop.material.color = c;
-          },
         },
         '<+=0.1'
       )
@@ -136,9 +132,9 @@ export default class GradientCircle {
         {
           z: -0.2,
           duration: 0.1,
-          onReverseComplete: () => {
-            console.log('start timer');
-          },
+          // onReverseComplete: () => {
+          //   console.log('start timer');
+          // },
         },
         '<+=0.2'
       )
@@ -154,11 +150,13 @@ export default class GradientCircle {
         { scale: 1, duration: 0.2, ease: 'power3.out' },
         '<'
       )
-      .to({}, {duration: 0.1})
+      .to({}, { duration: 0.1 })
       .to('.thirdTitle', { opacity: 0 }, '<+0.3')
 
       .to(this.model.lettersTop.position, { z: 0.2, duration: 0.2 }, '-=0.3')
       .to(this.model.lettersTop.scale, { z: 1.9, duration: 0.2 }, '<');
+
+    return this.timeline;
   }
 
   updateTime() {

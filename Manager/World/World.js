@@ -33,7 +33,7 @@ export default class World {
     const modelTimeline2 = this.model.timeline2;
     // const modelTimeline3 = this.model.timeline3;
     const cameraTimeline = this.camera.getTimeline();
-    const gradientTimeline = this.model.gradientCircle.timeline;
+    const gradientTimeline = this.model.gradientCircle.getTimeline();
     const modelLinesTimeline = this.model.modelLines.getTimeline();
     const edgeTimeline = this.model.edgeRim.getTimeline();
     const cameraTimeline2 = this.camera.getTimeline2();

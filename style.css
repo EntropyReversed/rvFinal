@@ -122,5 +122,6 @@ footer {
 }
 
 .scene-wrap {
-  height: 2000vh;
+  /* height: 2000vh; */
+  height: 100vh;
 }

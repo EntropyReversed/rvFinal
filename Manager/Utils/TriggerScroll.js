@@ -18,7 +18,8 @@ export default class TriggerScroll {
           scrub: 2,
           immediateRender: false,
           invalidateOnRefresh: true,
-          end: 'bottom bottom',
+          pin: true,
+          end: '+=16000',
         },
         onUpdate: () => {
           window.requestAnimationFrame(() => this.manager.update());

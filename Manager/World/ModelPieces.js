@@ -68,6 +68,7 @@ export default class ModelPieces {
             { z: 1 },
             { z: 0 },
           ],
+          ease: 'power1.inOut',
           duration: pieceDuration,
           delay: delay,
         },

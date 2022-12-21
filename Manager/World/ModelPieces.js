@@ -17,6 +17,8 @@ export default class ModelPieces {
   setUpPieces() {
     this.pieces.forEach((piece) => {
       this.setModelPart(piece, 1);
+      piece.position.z = -0.05;
+      piece.scale.z = 0;
       this.group.add(piece);
     });
   }
@@ -44,8 +46,45 @@ export default class ModelPieces {
       this.timeline.set(piece, { visible: true });
     });
 
+    const pieceDuration = 5;
+    let maxDelay = 0;
+    this.pieces.forEach((piece, index) => {
+      const delay = Math.random() * 0.01;
+      if (delay > maxDelay) {
+        maxDelay = delay;
+      }
+      this.timeline.to(
+        piece.scale,
+        {
+          keyframes: [
+            { z: 1 },
+            { z: 0.5 },
+            { z: 1.1 },
+            { z: 0.3 },
+            { z: 0.9 },
+            { z: 0.2 },
+            { z: 1.2 },
+            { z: 0.6 },
+            { z: 1 },
+            { z: 0 },
+          ],
+          duration: pieceDuration,
+          delay: delay,
+        },
+        index === 0 ? '' : '<'
+      );
+    });
+
+    // this.timeline.to(this.manager.camera.perspectiveCamera.)
+
+    this.timeline.to(
+      this.manager.world.model.modelGroup.rotation,
+      { z: Math.PI * 1.3, duration: pieceDuration + maxDelay },
+      '<'
+    );
+
     this.pieces.forEach((piece) => {
-      this.timeline.fromTo(piece.scale, { z: 0 }, { z: 1 }, '<');
+      this.timeline.set(piece, { visible: false });
     });
 
     return this.timeline;

@@ -33,10 +33,17 @@ export default class Camera {
     // const gui = new GUI();
     // const folder = gui.addFolder('Camera Pos');
 
+    // const guiChangeHangler = () => {
+    //   window.requestAnimationFrame(this.manager.update());
+    // };
+
     // const lookAtVector = new THREE.Vector3(0, 0, 0);
-    // folder.add(this.perspectiveCamera.position, 'x', -30, 30, 0.01).onChange(() => {
-    //   // this.perspectiveCamera.lookAt(lookAtVector)
-    // });
+    // folder
+    //   .add(this.perspectiveCamera.position, 'x', -30, 30, 0.01)
+    //   .onChange(() => {
+    //     guiChangeHangler();
+    //     // this.perspectiveCamera.lookAt(lookAtVector)
+    //   });
     // folder.add(this.perspectiveCamera.position, 'y', -30, 30, 0.01);
     // folder.add(this.perspectiveCamera.position, 'z', -30, 30, 0.01);
     // folder.open();

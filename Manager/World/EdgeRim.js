@@ -46,6 +46,7 @@ export default class EdgeRim {
     this.materialGrad.uniforms.u_texture.value = this.texture;
 
     this.inner.material = this.materialGrad;
+    this.inner.visible = false;
 
     this.group.add(this.inner);
   }
@@ -53,12 +54,13 @@ export default class EdgeRim {
   getTimeline() {
     this.timeline = gsap
       .timeline()
+      .set(this.inner, { visible: true })
       .fromTo(
         this.materialGrad.uniforms.opacity,
         { value: 0 },
         { value: 1, duration: 0.1 }
       )
-      // .set(this.materialGrad, { depthWrite: true })
+
       .to(
         this.materialGrad.uniforms.progress,
         { value: -0.2, duration: 1.5 },

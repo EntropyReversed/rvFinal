@@ -66,7 +66,6 @@ export default class Renderer {
     this.composer.renderToScreen = true;
     this.composer.addPass(this.renderScene);
     this.composer.addPass(bloomPass);
-    console.log(this.camera.perspectiveCamera);
   }
 
   resize() {

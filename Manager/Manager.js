@@ -28,8 +28,8 @@ export default class Manager {
 
     this.pause = false;
 
-    this.stats = new Stats();
-    document.body.appendChild(this.stats.dom);
+    // this.stats = new Stats();
+    // document.body.appendChild(this.stats.dom);
 
     document.body.onmousedown = function (e) {
       if (e.button === 1) return false;
@@ -49,7 +49,7 @@ export default class Manager {
   update() {
     this.camera.update();
     this.renderer.update();
-    this.stats.update();
+    // this.stats.update();
 
     this.world.model.gradientCircle.updateTime();
 

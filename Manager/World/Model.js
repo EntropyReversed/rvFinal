@@ -33,11 +33,11 @@ export default class Model {
 
     this.model.scene.traverse((child) => {
       switch (true) {
-        case child.name.includes('Circle'):
+        case child.name === 'Circle':
           this.circle = child;
           this.setModelPart(child, 1);
           break;
-        case child.name.includes('LettersFill'):
+        case child.name === 'LettersFill':
           this.letters = child;
           this.setModelPart(child);
           break;
@@ -45,14 +45,13 @@ export default class Model {
           this.lettersTop = child;
           this.setModelPart(child);
           break;
-        case child.name.includes('ring'):
+        case child.name === 'ring':
           this.mLines = child;
           break;
         case child.name === 'rim':
-          console.log('rim');
           this.edge = child;
           break;
-        case child.name.includes('rimInner'):
+        case child.name === 'rimInner':
           this.edgeInner = child;
           break;
         case child.name.includes('Piece'):
@@ -61,7 +60,11 @@ export default class Model {
       }
     });
 
-    this.modelPieces = new ModelPieces(this.pieces, this.modelGroup, this.mainColor);
+    this.modelPieces = new ModelPieces(
+      this.pieces,
+      this.modelGroup,
+      this.mainColor
+    );
     this.modelLines = new ModelLines(this.mLines, this.rimRingGroup);
     this.edgeRim = new EdgeRim(
       this.edge,

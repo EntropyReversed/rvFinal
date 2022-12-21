@@ -29,6 +29,7 @@ export default class EdgeRim {
   setInner() {
     // this.inner.visible = false;
     this.inner.rotation.z = -0.95;
+    this.inner.position.z = this.inner.position.z + 0.01;
 
     this.uniforms = THREE.UniformsUtils.merge([
       { u_texture: { value: null } },
@@ -72,7 +73,9 @@ export default class EdgeRim {
         { opacity: 0 },
         { opacity: 1, duration: 0.5 },
         '<-=0.2'
-      );
+      )
+      .set(this.inner, { visible: false })
+      .set(this.edge.material, { depthWrite: true });
 
     return this.timeline;
   }

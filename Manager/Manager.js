@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { Scene } from 'three';
 import Sizes from './Utils/Sizes';
 import Camera from './Camera';
 import Renderer from './Renderer';
@@ -6,7 +6,7 @@ import Resources from './Utils/Resources';
 import World from './World/World';
 import assets from './Utils/assets';
 import gsap from 'gsap';
-import Stats from 'three/addons/libs/stats.module.js';
+// import Stats from 'three/addons/libs/stats.module.js';
 
 export default class Manager {
   static instance;
@@ -18,7 +18,7 @@ export default class Manager {
     Manager.instance = this;
     this.parent = parent;
     this.canvas = this.parent.querySelector('canvas');
-    this.scene = new THREE.Scene();
+    this.scene = new Scene();
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();

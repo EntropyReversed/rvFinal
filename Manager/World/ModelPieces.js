@@ -60,7 +60,7 @@ export default class ModelPieces {
         '<'
       );
 
-    const pieceDuration = 7;
+    const pieceDuration = 6;
     let maxDelay = 0;
     this.pieces.forEach((piece) => {
       const delay = Math.random() * 0.01;
@@ -73,10 +73,10 @@ export default class ModelPieces {
           keyframes: [
             { z: 1 },
             { z: 0.5 },
-            { z: 1.1 },
-            { z: 0.3 },
             { z: 1.3 },
-            { z: 0.2 },
+            { z: 0.4 },
+            { z: 1.4 },
+            { z: 0.7 },
             { z: 1.2 },
             { z: 0.6 },
             { z: 1 },
@@ -94,7 +94,7 @@ export default class ModelPieces {
       .to(
         this.manager.world.model.modelGroup.rotation,
         { z: Math.PI * 1.1, duration: pieceDuration + maxDelay },
-        '<'
+        '<-=0.4'
       )
       .to(
         this.manager.world.model.circle.position,

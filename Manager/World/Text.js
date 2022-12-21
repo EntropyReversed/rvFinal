@@ -1,13 +1,9 @@
 import gsap from 'gsap';
 import Manager from '../Manager';
-import { TextPlugin } from 'gsap/TextPlugin';
-
-gsap.registerPlugin(TextPlugin);
 
 export default class Text {
   constructor() {
     this.manager = new Manager();
-    // this.text = this.manager.parent.querySelector(selector);
     this.timeline = gsap.timeline();
     this.splitText('.firstTitle .top');
     this.splitText('.firstTitle .btm');

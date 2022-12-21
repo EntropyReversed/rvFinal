@@ -18,8 +18,6 @@ export default class TriggerScroll {
           scrub: 2,
           immediateRender: false,
           invalidateOnRefresh: true,
-          // end: "+=1200%",
-          // pin: true,
           end: 'bottom bottom',
         },
         onUpdate: () => {

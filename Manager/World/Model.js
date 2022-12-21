@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { Color, MeshStandardMaterial, Group } from 'three';
 import gsap from 'gsap';
 import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
@@ -13,7 +13,7 @@ export default class Model {
     this.scene = this.manager.scene;
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
-    this.mainColor = new THREE.Color('rgb(200,200,200)');
+    this.mainColor = new Color('rgb(200,200,200)');
 
     this.setModel();
 
@@ -24,9 +24,9 @@ export default class Model {
   }
 
   setModel() {
-    this.mainMaterial = new THREE.MeshStandardMaterial();
-    this.rimRingGroup = new THREE.Group();
-    this.modelGroup = new THREE.Group();
+    this.mainMaterial = new MeshStandardMaterial();
+    this.rimRingGroup = new Group();
+    this.modelGroup = new Group();
     this.pieces = [];
 
     this.model.scene.traverse((child) => {

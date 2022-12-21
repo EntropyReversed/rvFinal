@@ -1,8 +1,14 @@
-import * as THREE from 'three';
+import {
+  UniformsUtils,
+  Mesh,
+  Clock,
+  Color,
+  PlaneGeometry,
+  ShaderMaterial,
+} from 'three';
 import Manager from '../Manager';
 import Shader from './Shader';
 import gsap from 'gsap';
-import { GUI } from 'dat.gui';
 
 export default class GradientCircle {
   constructor(lines, model) {
@@ -20,12 +26,12 @@ export default class GradientCircle {
   }
 
   setCircleGrad() {
-    this.circle = new THREE.Mesh();
-    this.geometry = new THREE.PlaneGeometry(4.25, 4.25);
+    this.circle = new Mesh();
+    this.geometry = new PlaneGeometry(4.25, 4.25);
 
-    this.clock = new THREE.Clock();
+    this.clock = new Clock();
 
-    this.uniforms = THREE.UniformsUtils.merge([
+    this.uniforms = UniformsUtils.merge([
       { u_texture: { value: null } },
       { u_letters_texture: { value: null } },
       { u_time: { value: this.clock.getElapsedTime() } },
@@ -34,7 +40,7 @@ export default class GradientCircle {
       { progress: { value: -0.1 } },
     ]);
 
-    this.materialGrad = new THREE.ShaderMaterial({
+    this.materialGrad = new ShaderMaterial({
       uniforms: this.uniforms,
       ...Shader,
       transparent: true,
@@ -59,7 +65,7 @@ export default class GradientCircle {
   }
 
   setUpTimeline() {
-    const c = new THREE.Color('rgb(0,0,0)');
+    const c = new Color('rgb(0,0,0)');
     this.timeline
       .set(this.model.lettersTop.position, { z: this.lettersStartZPos })
       .fromTo(
@@ -95,21 +101,18 @@ export default class GradientCircle {
           value: 1.1,
           duration: 0.8,
           ease: 'power3.out',
-          onStart: () => {
-            console.log('start timer');
-          },
-          onReverseComplete: () => {
-            console.log('stop timer');
-          },
-          onComplete: () => {
-            console.log('stop timer');
-          },
+          // onStart: () => {
+          //   console.log('start timer');
+          // },
+          // onReverseComplete: () => {
+          //   console.log('stop timer');
+          // },
+          // onComplete: () => {
+          //   console.log('stop timer');
+          // },
         },
         '<'
       )
-      // .call(() => {
-      //   console.log('stop timer');
-      // })
       .to(
         this.model.lettersTop.material,
         { metalness: 0.97, duration: 0.15 },
@@ -122,9 +125,9 @@ export default class GradientCircle {
           g: 200 / 255,
           b: 200 / 255,
           duration: 0.15,
-          onUpdate: () => {
-            this.model.lettersTop.material.color = c;
-          },
+          // onUpdate: () => {
+          //   this.model.lettersTop.material.color = c;
+          // },
         },
         '<+=0.1'
       )

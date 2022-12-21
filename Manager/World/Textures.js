@@ -1,12 +1,10 @@
-import * as THREE from 'three';
+import { CanvasTexture } from 'three';
 
 export default class Textures {
   constructor() {
-    this.gradientTexture = new THREE.CanvasTexture(this.generateTexture());
-    this.lettersTexture = new THREE.CanvasTexture(
-      this.generateTextureLetters()
-    );
-    // this.noiseTexture = new THREE.CanvasTexture(this.generateWhiteNoise());
+    this.gradientTexture = new CanvasTexture(this.generateTexture());
+    this.lettersTexture = new CanvasTexture(this.generateTextureLetters());
+    // this.noiseTexture = new CanvasTexture(this.generateWhiteNoise());
   }
 
   generateTexture() {

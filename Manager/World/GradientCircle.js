@@ -100,15 +100,21 @@ export default class GradientCircle {
           value: 1.1,
           duration: 0.8,
           ease: 'power3.out',
-          // onStart: () => {
-          //   console.log('start timer');
-          // },
-          // onReverseComplete: () => {
-          //   console.log('stop timer');
-          // },
-          // onComplete: () => {
-          //   console.log('stop timer');
-          // },
+          onStart: () => {
+            if (this.manager.pause) {
+              this.manager.pause = false;
+            }
+          },
+          onReverseComplete: () => {
+            if (!this.manager.pause) {
+              this.manager.pause = true;
+            }
+          },
+          onComplete: () => {
+            if (!this.manager.pause) {
+              this.manager.pause = true;
+            }
+          },
         },
         '<'
       )
@@ -132,9 +138,11 @@ export default class GradientCircle {
         {
           z: -0.2,
           duration: 0.1,
-          // onReverseComplete: () => {
-          //   console.log('start timer');
-          // },
+          onReverseComplete: () => {
+            if (this.manager.pause) {
+              this.manager.pause = false;
+            }
+          },
         },
         '<+=0.2'
       )

@@ -26,7 +26,7 @@ export default class Manager {
     this.masterTimeline = gsap.timeline();
     this.world = new World();
 
-    this.pause = false;
+    this.pause = true;
 
     // this.stats = new Stats();
     // document.body.appendChild(this.stats.dom);
@@ -43,7 +43,9 @@ export default class Manager {
     this.sizes.resize();
     this.camera.resize();
     this.renderer.resize();
-    window.requestAnimationFrame(() => this.update());
+    if (this.pause) {
+      window.requestAnimationFrame(() => this.update());
+    }
   }
 
   update() {
@@ -53,7 +55,7 @@ export default class Manager {
 
     this.world.model.gradientCircle.updateTime();
 
-    // if (this.pause) return;
-    // window.requestAnimationFrame(() => this.update());
+    if (this.pause) return;
+    window.requestAnimationFrame(() => this.update());
   }
 }

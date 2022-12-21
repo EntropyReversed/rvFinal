@@ -67,7 +67,7 @@ export default class EdgeRim {
         { value: -0.2, duration: 1.4 },
         '<+=0.1'
       )
-      .to(this.materialGrad.uniforms.opacity, { value: 0, duration: 1 })
+      .to(this.materialGrad.uniforms.opacity, { value: 0, duration: 1 }, "-=0.5")
       .fromTo(
         this.edge.material,
         { opacity: 0 },

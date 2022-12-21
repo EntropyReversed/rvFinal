@@ -16,7 +16,7 @@ export default class World {
     this.textures = new Textures();
     window.onbeforeunload = function () {
       window.scrollTo(0, 0);
-    }
+    };
 
     this.resources.on('ready', () => {
       this.model = new Model();
@@ -31,13 +31,12 @@ export default class World {
     const title1 = this.text.getTimeline();
     const modelTimeline1 = this.model.timeline;
     const modelTimeline2 = this.model.timeline2;
-    // const modelTimeline3 = this.model.timeline3;
     const cameraTimeline = this.camera.getTimeline();
     const gradientTimeline = this.model.gradientCircle.getTimeline();
     const modelLinesTimeline = this.model.modelLines.getTimeline();
     const edgeTimeline = this.model.edgeRim.getTimeline();
     const cameraTimeline2 = this.camera.getTimeline2();
-    const modelPiecesTimeline = this.model.modelPieces.getTimeline()
+    const modelPiecesTimeline = this.model.modelPieces.getTimeline();
 
     this.masterTimeline
       .add(modelTimeline1)
@@ -46,11 +45,10 @@ export default class World {
       .add(modelTimeline2, '-=1')
       .add(linesReverse, '-=0.3')
       .add(gradientTimeline, '-=0.1')
-      // .add(modelTimeline3);
       .add(cameraTimeline)
       .add(modelLinesTimeline, '<')
       .add(edgeTimeline, '-=1.5')
-      .add(cameraTimeline2, '-=1.7')
+      .add(cameraTimeline2, '-=1.2')
       .add(modelPiecesTimeline);
 
     this.scrollTrigger = new TriggerScroll();

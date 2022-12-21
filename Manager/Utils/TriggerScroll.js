@@ -22,7 +22,9 @@ export default class TriggerScroll {
           end: '+=16000',
         },
         onUpdate: () => {
-          window.requestAnimationFrame(() => this.manager.update());
+          if (this.manager.pause) {
+            window.requestAnimationFrame(() => this.manager.update());
+          }
         },
       })
       .add(this.manager.masterTimeline);

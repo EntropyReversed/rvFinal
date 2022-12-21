@@ -36,8 +36,8 @@ export default {
       
       vec3 circleMask = vec3(circle(uv,1.0));
 
-      // uv.x += (cos(uv.y*5.+progress*4.+u_time*0.4)/20.0);
-      uv.x += (cos(uv.y*5.+progress*4.)/20.0);
+      uv.x += (cos(uv.y*5.+progress*4.+u_time*0.4)/20.0);
+      // uv.x += (cos(uv.y*5.+progress*4.)/20.0);
 
       vec3 alphaMask = circleMask * smoothstep(progress,progress+0.08,uv.x);
 

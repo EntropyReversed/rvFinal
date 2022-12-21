@@ -16,6 +16,9 @@ export default class Camera {
     this.sizes = this.manager.sizes;
     this.scene = this.manager.scene;
     this.canvas = this.manager.canvas;
+    this.fovMax = 55;
+    this.fovMin = 35;
+    this.fov = this.fovMin;
     this.createPerspectiveCamera();
     this.createPerspectiveCameraMain();
 
@@ -24,7 +27,7 @@ export default class Camera {
 
   createPerspectiveCamera() {
     this.perspectiveCamera = new PerspectiveCamera(
-      35,
+      this.fov,
       this.sizes.aspect,
       0.1,
       200
@@ -193,6 +196,18 @@ export default class Camera {
   }
 
   resize() {
+    if (window.matchMedia('(max-width: 991px)').matches) {
+      if (this.fov !== this.fovMax) {
+        this.fov = this.fovMax
+      }
+      console.log('mobile', this.fov)
+    } else {
+      if (this.fov !== this.fovMin) {
+        this.fov = this.fovMin
+      }
+      console.log('desktop', this.fov)
+    }
+    this.perspectiveCamera.fov = this.fov
     this.perspectiveCamera.aspect = this.sizes.aspect;
     this.perspectiveCamera.updateProjectionMatrix();
 

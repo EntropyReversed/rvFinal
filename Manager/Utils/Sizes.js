@@ -1,11 +1,11 @@
 export default class Sizes {
   constructor() {
-    this.aspectSpan = document.createElement('span');
-    document.body.appendChild(this.aspectSpan);
-    this.aspectSpan.style.position = 'fixed';
-    this.aspectSpan.style.top = '0';
-    this.aspectSpan.style.left = '0';
-    this.aspectSpan.style.color = 'white';
+    // this.aspectSpan = document.createElement('span');
+    // document.body.appendChild(this.aspectSpan);
+    // this.aspectSpan.style.position = 'fixed';
+    // this.aspectSpan.style.top = '0';
+    // this.aspectSpan.style.left = '0';
+    // this.aspectSpan.style.color = 'white';
     this.setSizes();
   }
 
@@ -14,11 +14,11 @@ export default class Sizes {
     this.height = window.innerHeight;
     this.aspect = this.width / this.height;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
-    this.aspectSpan.innerHTML = this.aspect;
+    // this.aspectSpan.innerHTML = this.aspect;
   }
 
   resize() {
-    this.aspectSpan.innerHTML = this.aspect;
+    // this.aspectSpan.innerHTML = this.aspect;
     this.setSizes();
   }
 }

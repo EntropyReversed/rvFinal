@@ -54,7 +54,6 @@ export default class Manager {
   }
 
   update() {
-    console.log('update');
     // this.camera.update();
     this.renderer.update();
     // this.stats.update();

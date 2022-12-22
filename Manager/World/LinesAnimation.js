@@ -9,14 +9,9 @@ import {
 } from 'three';
 import gsap from 'gsap';
 
-const circleMaterial = new LineBasicMaterial({
-  transparent: true,
-  depthWrite: true,
-});
+const circleMaterial = new LineBasicMaterial();
 
-const lineMaterial = new LineBasicMaterial({
-  transparent: true,
-});
+const lineMaterial = new LineBasicMaterial();
 
 const updateCircle = (c, p) => {
   c.geometry.dispose();
@@ -38,10 +33,10 @@ class AnimatableCircle {
     };
   }
 
-  createCircle(r, width, pos, c = 'rgb(40,40,40)') {
+  createCircle(r, width, pos, color) {
     const geometry = new RingGeometry(r, r + width, 100, null, 0, 0);
     const material = circleMaterial.clone();
-    material.color = new Color(c);
+    material.color = color;
 
     const mesh = new Mesh(geometry, material);
 
@@ -55,7 +50,7 @@ class AnimatableCircle {
 }
 
 class AnimatableLine {
-  constructor(w, h, pos, ang, org, c = 'rgb(40,40,40)') {
+  constructor(w, h, pos, ang, org, c) {
     this.w = w;
     this.h = h;
     this.pos = pos;
@@ -95,7 +90,7 @@ class AnimatableLine {
     const geometry = new PlaneGeometry(this.w, this.h);
     geometry.translate(...offset);
     const material = lineMaterial.clone();
-    material.color = new Color(this.c);
+    material.color = this.c;
     const mesh = new Mesh(geometry, material);
     mesh.position.set(...position);
     mesh.rotation.set(0, 0, this.ang);
@@ -111,6 +106,8 @@ export default class LinesAnimation {
     this.r = 2.8;
     this.w = 0.02;
     this.g = 0.2;
+    this.colorCircle = new Color('rgb(40,40,40)');
+    this.colorLine = new Color('rgb(10,10,10)');
 
     this.timeline = gsap.timeline();
     this.groupTimeline = gsap.timeline();
@@ -156,21 +153,24 @@ export default class LinesAnimation {
       this.w,
       new Vector3(0, 0, -0.0025),
       halfPI,
-      'btm'
+      'btm',
+      this.colorLine
     );
     this.lineRight = new AnimatableLine(
       12,
       this.w,
       new Vector3(this.r + this.w * 0.5, 0, -0.0015),
       halfPI,
-      'btm'
+      'btm',
+      this.colorLine
     );
     this.lineLeft = new AnimatableLine(
       12,
       this.w,
       new Vector3((this.r + this.w * 0.5) * -1, 0, -0.003),
       halfPI,
-      'btm'
+      'btm',
+      this.colorLine
     );
 
     this.lineTop = new AnimatableLine(
@@ -178,14 +178,16 @@ export default class LinesAnimation {
       this.w,
       new Vector3(0, this.r + this.w * 0.5, -0.0035),
       0,
-      'left'
+      'left',
+      this.colorLine
     );
     this.lineBtm = new AnimatableLine(
       18,
       this.w,
       new Vector3(0, (this.r + this.w * 0.5) * -1, -0.004),
       0,
-      'right'
+      'right',
+      this.colorLine
     );
 
     this.lineTopI = new AnimatableLine(
@@ -193,28 +195,32 @@ export default class LinesAnimation {
       this.w,
       new Vector3(0, this.r + this.w * 0.5 - this.g, -0.0045),
       0,
-      'left'
+      'left',
+      this.colorLine
     );
     this.lineBtmI = new AnimatableLine(
       18,
       this.w,
       new Vector3(0, (this.r + this.w * 0.5 - this.g) * -1, -0.005),
       0,
-      'right'
+      'right',
+      this.colorLine
     );
     this.lineRightI = new AnimatableLine(
       12,
       this.w,
       new Vector3(this.r + this.w * 0.5 - this.g, 0, -0.0055),
       halfPI,
-      'top'
+      'top',
+      this.colorLine
     );
     this.lineLeftI = new AnimatableLine(
       12,
       this.w,
       new Vector3((this.r + this.w * 0.5 - this.g) * -1, 0, -0.006),
       halfPI,
-      'btm'
+      'btm',
+      this.colorLine
     );
 
     this.lineMidT = new AnimatableLine(
@@ -222,7 +228,8 @@ export default class LinesAnimation {
       this.w,
       new Vector3(0, this.r * 0.5 + this.w * 0.5 - this.g - 0.1, -0.0065),
       0,
-      'left'
+      'left',
+      this.colorLine
     );
 
     this.lineMidB = new AnimatableLine(
@@ -230,7 +237,8 @@ export default class LinesAnimation {
       this.w,
       new Vector3(0, (this.r * 0.5 + this.w * 0.5 - this.g) * -1 + 0.1, -0.007),
       0,
-      'right'
+      'right',
+      this.colorLine
     );
 
     this.lineD1 = new AnimatableLine(
@@ -238,14 +246,16 @@ export default class LinesAnimation {
       this.w,
       new Vector3(0, 0, -0.0075),
       halfPI * 0.5,
-      ''
+      '',
+      this.colorLine
     );
     this.lineD2 = new AnimatableLine(
       18,
       this.w,
       new Vector3(0, 0, -0.008),
       halfPI * -0.5,
-      ''
+      '',
+      this.colorLine
     );
 
     this.group.add(this.lineMid.line);
@@ -264,47 +274,59 @@ export default class LinesAnimation {
   }
 
   generateCircles() {
-    this.circleMid = new AnimatableCircle(this.r, this.w, new Vector3(0, 0, 0));
+    this.circleMid = new AnimatableCircle(
+      this.r,
+      this.w,
+      new Vector3(0, 0, 0),
+      this.colorCircle
+    );
     this.circleMain = new AnimatableCircle(
       this.r - this.g,
       this.w * 2,
       new Vector3(0, 0, 0),
-      'rgb(255,255,255)'
+      new Color('rgb(255,255,255)')
     );
     this.circleLeft = new AnimatableCircle(
       this.r,
       this.w,
-      new Vector3(this.r * -2 - this.w, 0, 0.001)
+      new Vector3(this.r * -2 - this.w, 0, 0.001),
+      this.colorCircle
     );
     this.circleRight = new AnimatableCircle(
       this.r,
       this.w,
-      new Vector3(this.r * 2 + this.w, 0, 0.002)
+      new Vector3(this.r * 2 + this.w, 0, 0.002),
+      this.colorCircle
     );
     this.circleTop = new AnimatableCircle(
       this.r,
       this.w,
-      new Vector3(0, this.r * 2 + this.w, 0.0025)
+      new Vector3(0, this.r * 2 + this.w, 0.0025),
+      this.colorCircle
     );
     this.circleTopS = new AnimatableCircle(
       this.r / 2,
       this.w,
-      new Vector3(this.r / 2, this.r * 1.5 + this.w, 0.0028)
+      new Vector3(this.r / 2, this.r * 1.5 + this.w, 0.0028),
+      this.colorCircle
     );
     this.circleTopXS = new AnimatableCircle(
       this.r / 4,
       this.w,
-      new Vector3(this.r / 2, this.r * 1.25 + this.w, 0.003)
+      new Vector3(this.r / 2, this.r * 1.25 + this.w, 0.003),
+      this.colorCircle
     );
     this.circleBtm = new AnimatableCircle(
       this.r,
       this.w,
-      new Vector3(0, this.r * -2 - this.w, 0.0031)
+      new Vector3(0, this.r * -2 - this.w, 0.0031),
+      this.colorCircle
     );
     this.circleBtmS = new AnimatableCircle(
       this.r / 2,
       this.w,
-      new Vector3(this.r / 2, this.r * -1.5 - this.w, 0.0035)
+      new Vector3(this.r / 2, this.r * -1.5 - this.w, 0.0035),
+      this.colorCircle
     );
 
     this.group.add(this.circleMid.circle);
@@ -351,7 +373,7 @@ export default class LinesAnimation {
       [this.circleLeft, '<-0.2'],
       [this.circleBtm, '<+0.1'],
       [this.circleBtmS, '<+0.15'],
-      [this.circleMain, '<+1.2'],
+      [this.circleMain, '<+1.7'],
     ];
     const dur = 0.8;
     const twoPI = Math.PI * 2;
@@ -370,13 +392,11 @@ export default class LinesAnimation {
       );
     });
 
-    steps.forEach((step) => {
-      this.circlesTimeline.to(
-        step[0].circle.material,
-        { opacity: 0.3, duration: dur / 2 },
-        '<'
-      );
-    });
+    this.circlesTimeline.to(
+      this.colorCircle,
+      { r: 8 / 255, g: 8 / 255, b: 8 / 255, duration: dur / 2 },
+      '<-=0.5'
+    );
   }
 
   createCirclesReverseTimeline() {
@@ -390,7 +410,7 @@ export default class LinesAnimation {
       [this.circleBtm, '<'],
       [this.circleBtmS, '<'],
     ];
-    const dur = 0.4;
+    const dur = 0.5;
 
     this.circlesTimelineReverse.to(this.circleMain.circle.material, {
       opacity: 1,
@@ -438,13 +458,11 @@ export default class LinesAnimation {
       );
     });
 
-    steps.forEach((step) => {
-      this.linesTimeline.to(
-        step[0].line.material,
-        { opacity: 0.3, duration: dur / 2 },
-        '<'
-      );
-    });
+    this.linesTimeline.to(
+      this.colorLine,
+      { r: 5 / 255, g: 5 / 255, b: 5 / 255, duration: dur / 2 },
+      '<'
+    );
   }
 
   createLinesReverseTimeline() {
@@ -463,7 +481,7 @@ export default class LinesAnimation {
       [this.lineMidT, '<+0.1'],
       [this.lineMidB, '<'],
     ];
-    const dur = 0.6;
+    const dur = 0.7;
 
     steps.forEach((step) => {
       this.linesTimelineReverse.to(

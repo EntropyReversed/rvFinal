@@ -72,7 +72,7 @@ export default class GradientCircle {
         { x: 0, y: 0 },
         { x: 3.1, y: 3.1, duration: 0.8 }
       )
-      .set(this.lines.circleMain.circle.material, { opacity: 0 })
+      .set(this.lines.circleMain.circle, { visible: false })
 
       .to(this.model.modelGroup.rotation, { x: -1, z: -0.7, duration: 1 })
       .to(this.model.modelGroup.position, { z: 4, duration: 0.8 }, '<')

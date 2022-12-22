@@ -6,6 +6,7 @@ import Resources from './Utils/Resources';
 import World from './World/World';
 import assets from './Utils/assets';
 import gsap from 'gsap';
+import { RealVhCssVar } from '../Manager/Utils/RealVhCssVar';
 // import Stats from 'three/addons/libs/stats.module.js';
 
 export default class Manager {
@@ -25,6 +26,7 @@ export default class Manager {
     this.resources = new Resources(assets);
     this.masterTimeline = gsap.timeline();
     this.world = new World();
+    this.setVHvar = new RealVhCssVar();
 
     this.pause = true;
 

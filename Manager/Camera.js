@@ -26,6 +26,7 @@ export default class Camera {
   }
 
   createPerspectiveCamera() {
+    this.setUpFov();
     this.perspectiveCamera = new PerspectiveCamera(
       this.fov,
       this.sizes.aspect,
@@ -195,7 +196,7 @@ export default class Camera {
     this.controls.enableZoom = false;
   }
 
-  resize() {
+  setUpFov() {
     if (window.matchMedia('(max-width: 991px)').matches) {
       if (this.fov !== this.fovMax) {
         this.fov = this.fovMax;
@@ -205,6 +206,10 @@ export default class Camera {
         this.fov = this.fovMin;
       }
     }
+  }
+
+  resize() {
+    this.setUpFov();
     this.perspectiveCamera.fov = this.fov;
     this.perspectiveCamera.aspect = this.sizes.aspect;
     this.perspectiveCamera.updateProjectionMatrix();

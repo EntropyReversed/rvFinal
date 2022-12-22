@@ -102,6 +102,8 @@ footer {
   pointer-events: none;
   display: flex;
   flex-direction: column;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .scene h2.thirdTitle,
@@ -123,6 +125,7 @@ footer {
 }
 
 .scene-wrap {
-  /* height: 2000vh; */
-  height: 100vh;
+  --vh100: calc(var(--vh, 1vh) * 100);
+  height: var(--vh100) !important;
+  max-height: var(--vh100) !important;
 }

@@ -22,12 +22,10 @@ export default class EdgeRim {
     this.edge.material.opacity = 0;
     this.edge.material.metalness = 0.97;
     this.edge.material.roughness = 0.1;
-
     this.group.add(this.edge);
   }
 
   setInner() {
-    // this.inner.visible = false;
     this.inner.rotation.z = -0.95;
     this.inner.position.z = this.inner.position.z + 0.005;
 

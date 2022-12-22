@@ -42,7 +42,7 @@ export default class World {
       .add(modelTimeline1)
       .add(title1, '<+0.1')
       .add(linesTimeline, '-=0.35')
-      .add(modelTimeline2, '-=1')
+      .add(modelTimeline2, '-=1.3')
       .add(linesReverse, '-=0.3')
       .add(gradientTimeline, '-=0.1')
       .add(cameraTimeline)

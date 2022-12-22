@@ -11,11 +11,11 @@ export default class EdgeRim {
     this.group = group;
     this.color = color;
     this.texture = this.manager.world.textures.gradientTexture;
-    this.setUp();
+    this.setEdge();
     this.setInner();
   }
 
-  setUp() {
+  setEdge() {
     this.edge.material.transparent = true;
     this.edge.material.color = this.color;
     this.edge.material.depthWrite = false;
@@ -67,7 +67,11 @@ export default class EdgeRim {
         { value: -0.2, duration: 1.4 },
         '<+=0.1'
       )
-      .to(this.materialGrad.uniforms.opacity, { value: 0, duration: 1 }, "-=0.5")
+      .to(
+        this.materialGrad.uniforms.opacity,
+        { value: 0, duration: 1 },
+        '-=0.5'
+      )
       .fromTo(
         this.edge.material,
         { opacity: 0 },

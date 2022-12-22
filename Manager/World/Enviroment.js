@@ -6,6 +6,7 @@ import {
   AmbientLight,
 } from 'three';
 import Manager from '../Manager';
+// import { GUI } from 'dat.gui';
 
 export default class Enviroment {
   constructor() {
@@ -42,5 +43,14 @@ export default class Enviroment {
 
     this.ambientlight = new AmbientLight('#ffffff', 1.2);
     this.scene.add(this.ambientlight);
+
+    //     const gui = new GUI();
+    // const folder = gui.addFolder('Camera Pos');
+
+    // folder
+    //   .add(this.sunLight.position, 'x', -30, 30, 0.01)
+
+    // folder.add(this.sunLight.position, 'y', -30, 30, 0.01);
+    // folder.add(this.sunLight.position, 'z', -30, 30, 0.01);
   }
 }

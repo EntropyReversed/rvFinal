@@ -91,6 +91,19 @@ export default class ModelPieces {
     });
 
     this.timeline
+      // .to(
+      //   this.manager.camera.perspectiveCamera.position,
+      //   {
+      //     x: -4,
+      //     y: 1.96,
+      //     z: 5.2,
+      //     duration: pieceDuration * 0.5,
+      //     onUpdate: () => {
+      //       this.manager.camera.perspectiveCamera.updateProjectionMatrix();
+      //     },
+      //   },
+      //   '<'
+      // )
       .to(
         this.manager.world.model.modelGroup.rotation,
         { z: Math.PI * 1.1, duration: pieceDuration + maxDelay },
@@ -104,6 +117,19 @@ export default class ModelPieces {
         },
         '-=2'
       )
+      // .to(
+      //   this.manager.camera.perspectiveCamera.position,
+      //   {
+      //     x: -4.85,
+      //     y: 2.86,
+      //     z: 5.78,
+      //     duration: pieceDuration * 0.5,
+      //     onUpdate: () => {
+      //       this.manager.camera.perspectiveCamera.updateProjectionMatrix();
+      //     },
+      //   },
+      //   '<'
+      // )
 
       .fromTo(
         '.fifthTitle',

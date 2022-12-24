@@ -4,47 +4,53 @@ import {
   Mesh,
   Group,
   LineBasicMaterial,
-  RingGeometry,
+  ShaderMaterial,
   PlaneGeometry,
+  UniformsUtils,
 } from 'three';
 import gsap from 'gsap';
-
-const circleMaterial = new LineBasicMaterial();
+import ShaderCircles from './../Shaders/ShaderCircles.js';
 
 const lineMaterial = new LineBasicMaterial();
 
-const updateCircle = (c, p) => {
-  c.geometry.dispose();
-  c.geometry = new RingGeometry(
-    c.userData.radius,
-    c.userData.width,
-    64,
-    null,
-    0,
-    p
-  );
-};
-
 class AnimatableCircle {
-  constructor(r, w, pos, c) {
-    this.circle = this.createCircle(r, w, pos, c);
-    this.obj = {
-      progress: 0,
-    };
+  constructor(r, w, pos, op) {
+    this.radius = r + w;
+    this.strokeW = w;
+    this.pos = pos;
+    this.opacity = op;
+    this.setUpShader();
+    this.circle = this.createCircle();
   }
 
-  createCircle(r, width, pos, color) {
-    const geometry = new RingGeometry(r, r + width, 100, null, 0, 0);
-    const material = circleMaterial.clone();
-    material.color = color;
+  setUpShader() {
+    this.uniforms = UniformsUtils.merge([
+      { opacity: { value: this.opacity } },
+      { strokeWidth: { value: this.strokeW } },
+      { progress: { value: 0 } },
+      { PI: { value: Math.PI } },
+    ]);
 
-    const mesh = new Mesh(geometry, material);
+    this.circleMaterial = new ShaderMaterial({
+      uniforms: this.uniforms,
+      ...ShaderCircles,
+      transparent: true,
+      depthWrite: false,
+    });
+  }
+
+  createCircle() {
+    const geometry = new PlaneGeometry(this.radius * 2, this.radius * 2);
+
+    const mesh = new Mesh(geometry, this.circleMaterial);
 
     mesh.userData = {
-      radius: r,
-      width: r + width,
+      radius: this.radius,
+      width: this.radius + this.strokeW,
     };
-    mesh.position.set(pos.x, pos.y, pos.z);
+    mesh.position.set(this.pos.x, this.pos.y, this.pos.z);
+    mesh.scale.x = -1;
+    mesh.rotation.z = Math.PI * 1.5;
     return mesh;
   }
 }
@@ -104,8 +110,9 @@ export default class LinesAnimation {
     this.group = new Group();
     this.group.name = 'Lines';
     this.r = 2.8;
-    this.w = 0.02;
+    this.w = 0.015;
     this.g = 0.2;
+    this.circleOp = 0.3;
     this.colorCircle = new Color('rgb(40,40,40)');
     this.colorLine = new Color('rgb(10,10,10)');
 
@@ -278,55 +285,55 @@ export default class LinesAnimation {
       this.r,
       this.w,
       new Vector3(0, 0, 0),
-      this.colorCircle
+      this.circleOp
     );
     this.circleMain = new AnimatableCircle(
       this.r - this.g,
-      this.w * 2,
-      new Vector3(0, 0, 0),
-      new Color('rgb(255,255,255)')
+      this.w * 1.8,
+      new Vector3(0, 0, 0.0014),
+      1
     );
     this.circleLeft = new AnimatableCircle(
       this.r,
       this.w,
       new Vector3(this.r * -2 - this.w, 0, 0.001),
-      this.colorCircle
+      this.circleOp
     );
     this.circleRight = new AnimatableCircle(
       this.r,
       this.w,
       new Vector3(this.r * 2 + this.w, 0, 0.002),
-      this.colorCircle
+      this.circleOp
     );
     this.circleTop = new AnimatableCircle(
       this.r,
       this.w,
       new Vector3(0, this.r * 2 + this.w, 0.0025),
-      this.colorCircle
+      this.circleOp
     );
     this.circleTopS = new AnimatableCircle(
       this.r / 2,
-      this.w,
-      new Vector3(this.r / 2, this.r * 1.5 + this.w, 0.0028),
-      this.colorCircle
+      this.w * 2,
+      new Vector3(this.r / 2, this.r * 1.5 + this.w, -0.002),
+      this.circleOp
     );
     this.circleTopXS = new AnimatableCircle(
       this.r / 4,
-      this.w,
-      new Vector3(this.r / 2, this.r * 1.25 + this.w, 0.003),
-      this.colorCircle
+      this.w * 4,
+      new Vector3(this.r / 2, this.r * 1.25 + this.w * 4, 0.003),
+      this.circleOp
     );
     this.circleBtm = new AnimatableCircle(
       this.r,
       this.w,
       new Vector3(0, this.r * -2 - this.w, 0.0031),
-      this.colorCircle
+      this.circleOp
     );
     this.circleBtmS = new AnimatableCircle(
       this.r / 2,
-      this.w,
-      new Vector3(this.r / 2, this.r * -1.5 - this.w, 0.0035),
-      this.colorCircle
+      this.w * 2,
+      new Vector3(this.r / 2, this.r * -1.5 - this.w, 0.004),
+      this.circleOp
     );
 
     this.group.add(this.circleMid.circle);
@@ -376,27 +383,17 @@ export default class LinesAnimation {
       [this.circleMain, '<+1.7'],
     ];
     const dur = 0.8;
-    const twoPI = Math.PI * 2;
 
     steps.forEach((step) => {
       this.circlesTimeline.to(
-        step[0].obj,
+        step[0].circleMaterial.uniforms.progress,
         {
-          progress: twoPI,
+          value: 1,
           duration: dur,
-          onUpdate: () => {
-            updateCircle(step[0].circle, step[0].obj.progress);
-          },
         },
         step[1]
       );
     });
-
-    this.circlesTimeline.to(
-      this.colorCircle,
-      { r: 8 / 255, g: 8 / 255, b: 8 / 255, duration: dur / 2 },
-      '<-=0.5'
-    );
   }
 
   createCirclesReverseTimeline() {
@@ -410,21 +407,14 @@ export default class LinesAnimation {
       [this.circleBtm, '<'],
       [this.circleBtmS, '<'],
     ];
-    const dur = 0.5;
-
-    this.circlesTimelineReverse.to(this.circleMain.circle.material, {
-      opacity: 1,
-    });
+    const dur = 0.6;
 
     steps.forEach((step) => {
       this.circlesTimelineReverse.to(
-        step[0].obj,
+        step[0].circleMaterial.uniforms.progress,
         {
-          progress: 0,
+          value: 0,
           duration: dur,
-          onUpdate: () => {
-            updateCircle(step[0].circle, step[0].obj.progress);
-          },
         },
         step[1]
       );

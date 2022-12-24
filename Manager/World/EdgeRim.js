@@ -1,7 +1,7 @@
 import { UniformsUtils, ShaderMaterial } from 'three';
 import gsap from 'gsap';
-import ShaderInnerRim from '../../Manager/World/ShaderInnerRim';
-import Manager from '../../Manager/Manager';
+import ShaderInnerRim from './../Shaders/ShaderInnerRim';
+import Manager from './../Manager';
 
 export default class EdgeRim {
   constructor(edge, inner, group, color) {

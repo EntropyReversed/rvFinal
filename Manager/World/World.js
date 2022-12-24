@@ -3,7 +3,7 @@ import Model from './Model';
 import Enviroment from './Enviroment';
 import Text from './Text';
 import TriggerScroll from '../Utils/TriggerScroll';
-import Textures from './Textures';
+import Textures from './../Utils/Textures';
 
 export default class World {
   constructor() {

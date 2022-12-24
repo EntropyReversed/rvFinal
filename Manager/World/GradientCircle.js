@@ -7,7 +7,7 @@ import {
   ShaderMaterial,
 } from 'three';
 import Manager from '../Manager';
-import Shader from './Shader';
+import Shader from './../Shaders/ShaderGradient';
 import gsap from 'gsap';
 
 export default class GradientCircle {

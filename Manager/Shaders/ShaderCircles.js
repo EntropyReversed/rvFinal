@@ -9,7 +9,7 @@ export default {
   `,
 
   fragmentShader: `
-    // precision highp float;
+    precision highp float;
 
     varying vec2 vUv;
 
@@ -20,8 +20,8 @@ export default {
 
     float circle(in vec2 _st, in float _radius){
       vec2 dist = _st-vec2(0.5);
-      return 1.-smoothstep(_radius-(_radius*0.005),
-                           _radius+(_radius*0.005),
+      return 1.-smoothstep(_radius-(_radius*0.006),
+                           _radius+(_radius*0.006),
                            dot(dist,dist)*4.0);
     }
 

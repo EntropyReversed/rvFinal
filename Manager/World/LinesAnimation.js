@@ -319,8 +319,8 @@ export default class LinesAnimation {
     );
     this.circleTopXS = new AnimatableCircle(
       this.r / 4,
-      this.w * 4,
-      new Vector3(this.r / 2, this.r * 1.25 + this.w * 4, 0.003),
+      this.w * 3,
+      new Vector3(this.r / 2, this.r * 1.25 + this.w * 3, 0.003),
       this.circleOp
     );
     this.circleBtm = new AnimatableCircle(

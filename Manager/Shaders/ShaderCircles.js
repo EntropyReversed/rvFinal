@@ -11,12 +11,13 @@ export default {
   fragmentShader: `
     precision highp float;
 
+    const float PI = 3.14159265358979323846;
     varying vec2 vUv;
 
     uniform float strokeWidth;
     uniform float progress;
     uniform float opacity;
-    uniform float PI;
+    uniform bool mainCircle;
 
     float circle(in vec2 _st, in float _radius){
       vec2 dist = _st-vec2(0.5);
@@ -35,7 +36,7 @@ export default {
     }
 
     float halfSlice(vec2 uv, float angle) {
-      // float c = circle(uv,1.0);
+
       float c = 1.0 - length(uv - 0.5);
       c = step(0.5, c);
       c -= step(uv.x, 0.5);
@@ -53,22 +54,21 @@ export default {
       return halfSlice(ruv, remainingAngle) + halfSlice(uv, PI);
     }
 
-
     void main() {
       vec2 uv = vUv;
-      vec3 circleMask = vec3(circle(uv,1.0-strokeWidth));
-      vec3 circleMask2 = vec3(circle(uv,1.0));
-      vec3 alphaMask = (circleMask2-circleMask);
+      vec3 circleMaskOut = vec3(circle(uv,1.0));
+      vec3 circleMaskIn = vec3(circle(uv,1.0-strokeWidth));
+      vec3 alphaMask = (circleMaskOut-circleMaskIn);
 
       float angle = progress * PI * 2.0;
       float cReturn = slice(uv, angle);
 
-      // if (progress >= 1.0) {
-      //   gl_FragColor = vec4(alphaMask-(1.0-opacity), alphaMask);
-      // } else {
-      //   gl_FragColor = vec4(vec3(cReturn-(1.0-opacity)), alphaMask*cReturn);
-      // }
-      gl_FragColor = vec4(vec3(cReturn-(1.0-opacity)), alphaMask*cReturn);
+      if (progress >= 1.0 && mainCircle) {
+        gl_FragColor = vec4(alphaMask-(1.0-opacity), alphaMask);
+      } else {
+        gl_FragColor = vec4(vec3(cReturn-(1.0-opacity)), alphaMask*cReturn);
+      }
+      
     }
   `,
 };

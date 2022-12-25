@@ -28,7 +28,7 @@ class AnimatableCircle {
       { opacity: { value: this.opacity } },
       { strokeWidth: { value: this.strokeW } },
       { progress: { value: 0 } },
-      { PI: { value: Math.PI } },
+      { mainCircle: { value: false } },
     ]);
 
     this.circleMaterial = new ShaderMaterial({
@@ -293,6 +293,7 @@ export default class LinesAnimation {
       new Vector3(0, 0, 0.0014),
       1
     );
+    this.circleMain.circleMaterial.uniforms.mainCircle.value = true;
     this.circleLeft = new AnimatableCircle(
       this.r,
       this.w,

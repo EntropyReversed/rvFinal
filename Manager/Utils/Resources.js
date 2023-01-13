@@ -1,6 +1,5 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-// import { TextureLoader } from 'three';
 import Manager from '../Manager';
 
 export default class Resources {
@@ -22,10 +21,9 @@ export default class Resources {
     this.loaders = {};
     this.loaders.gltfLoader = new GLTFLoader();
     this.loaders.dracoLoader = new DRACOLoader();
-    // this.loaders.textureLoader = new TextureLoader();
 
     this.loaders.dracoLoader.setDecoderPath(
-      'https://www.gstatic.com/draco/v1/decoders/'
+      '../node_modules/three/examples/js/libs/draco/gltf/'
     );
     this.loaders.dracoLoader.setDecoderConfig({ type: 'js' });
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);

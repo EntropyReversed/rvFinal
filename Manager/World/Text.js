@@ -7,6 +7,7 @@ export default class Text {
     this.timeline = gsap.timeline();
     this.splitText('.firstTitle');
     // this.splitHTML2(document.querySelector('.firstTitle'))
+    // console.log(this.splitHTML2(document.querySelector('.firstTitle')))
   }
 
   getTimeline() {
@@ -90,11 +91,12 @@ export default class Text {
       }
     } else {
       for (let i = 0; i < node.childNodes.length; i++) {
-        splitHTML(node.childNodes[i]);
+        this.splitHTML2(node.childNodes[i]);
       }
     }
     return node;
   }
+
   splitText(selector) {
     const node = this.manager.parent.querySelector(selector);
     node.innerHTML = node.innerText

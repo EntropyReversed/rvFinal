@@ -23,7 +23,7 @@ export default class Resources {
     this.loaders.dracoLoader = new DRACOLoader();
 
     this.loaders.dracoLoader.setDecoderPath(
-      '../node_modules/three/examples/js/libs/draco/gltf/'
+      'https://www.gstatic.com/draco/v1/decoders/'
     );
     this.loaders.dracoLoader.setDecoderConfig({ type: 'js' });
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);

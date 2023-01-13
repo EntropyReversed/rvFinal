@@ -53,8 +53,6 @@ export default class Renderer {
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
     this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
 
-    console.log('renderer info', this.renderer.info);
-
     this.renderScene = new RenderPass(
       this.scene,
       this.camera.perspectiveCamera

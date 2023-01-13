@@ -18,11 +18,19 @@ export default class World {
       window.scrollTo(0, 0);
     };
 
-    this.resources.on('ready', () => {
-      this.model = new Model();
-      this.setUpTimeline();
-      window.requestAnimationFrame(() => this.manager.update());
-    });
+    this.manager.parent.addEventListener(
+      'ready',
+      (e) => {
+        this.onReady();
+      },
+      false
+    );
+  }
+
+  onReady() {
+    this.model = new Model();
+    this.setUpTimeline();
+    window.requestAnimationFrame(() => this.manager.update());
   }
 
   setUpTimeline() {

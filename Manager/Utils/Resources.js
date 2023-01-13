@@ -1,12 +1,10 @@
-import { EventEmitter } from 'events';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 // import { TextureLoader } from 'three';
 import Manager from '../Manager';
 
-export default class Resources extends EventEmitter {
+export default class Resources {
   constructor(assets) {
-    super();
     this.manager = new Manager();
     this.renderer = this.manager.renderer;
 
@@ -55,7 +53,7 @@ export default class Resources extends EventEmitter {
 
     if (this.loaded === this.queue) {
       setTimeout(() => {
-        this.emit('ready');
+        this.manager.parent.dispatchEvent(new Event('ready'));
         document.body.classList.remove('loading');
       }, 500);
     }

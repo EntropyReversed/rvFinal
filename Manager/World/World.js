@@ -10,7 +10,7 @@ export default class World {
     this.manager = new Manager();
     this.masterTimeline = this.manager.masterTimeline;
     this.resources = this.manager.resources;
-    this.text = new Text();
+    this.text = new Text(this.manager);
     this.camera = this.manager.camera;
     this.enviroment = new Enviroment();
     this.textures = new Textures();

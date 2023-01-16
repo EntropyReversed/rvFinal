@@ -162,28 +162,26 @@ footer {
   padding-left: 15px;
 }
 
-.scene h2.firstTitle {
-  max-width: clamp(380px, 36.46vw, 700px);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+.firstTitle {
+  --letterSpacing: 0.12em;
 }
 
-.scene h2.firstTitle .word:last-of-type {
-  font-style: italic;
+.firstTitle *:not(sup):not(sub) {
+  display: inline-block;
+  font-size: inherit;
 }
 
-.scene h2.firstTitle .word:last-of-type .letter:nth-last-child(-n + 2) {
-  font-size: clamp(10px, 1.04vw, 20px);
+.firstTitle {
+  margin: 0 calc(var(--letterSpacing) * -1);
 }
 
-.scene h2.secondTitle {
-  max-width: clamp(380px, 34.9vw, 670px);
+.firstTitle .word {
+  margin: 0 var(--letterSpacing);
 }
 
-.scene h2.thirdTitle {
-  max-width: clamp(380px, 36.46vw, 700px);
+.firstTitle sup .word,
+.firstTitle sub .word {
+  margin-left: 0;
 }
 
 .scene h2.thirdTitle,
